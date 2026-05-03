@@ -1,0 +1,13 @@
+[project]
+name = "industrial-agent-code"
+version = "0.1.0"
+description = "Runnable companion code for the Industrial AI Agent series."
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

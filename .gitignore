@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.agent_state.json
+.pytest_cache/
+.ruff_cache/
+.venv/
+dist/
+build/
+*.egg-info/
