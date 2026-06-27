@@ -6,18 +6,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
-
-DEMO_DIRS = [
-    "11_rag_diagnosis",
-    "12_query_rewrite",
-    "13_chunking",
-    "14_rerank_hybrid",
-    "15_graphrag",
-    "16_memory_pipeline",
-    "17_mem0",
-    "18_layered_memory",
-]
+from run_all_demos import DEMO_DIRS  # single source of truth for chapters 11-50
 
 
 def test_all_chapter_demos_run() -> None:
