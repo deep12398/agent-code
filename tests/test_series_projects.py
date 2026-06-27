@@ -9,18 +9,13 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 from series_projects.chapter_runner import run_chapter
-from series_projects.interview_project import (
-    ENGINEERING_QUESTIONS,
-    PRINCIPLE_QUESTIONS,
-    InterviewProject,
-)
 from series_projects.llmops_platform_project import LLMOpsPlatformProject
 from series_projects.sourcing_agent_project import SourcingAgentProject
 
 
 class ChapterRangeTests(unittest.TestCase):
-    def test_every_chapter_11_to_50_dispatches(self) -> None:
-        for chapter in range(11, 51):
+    def test_every_chapter_11_to_48_dispatches(self) -> None:
+        for chapter in range(11, 49):
             result = run_chapter(chapter)
             self.assertEqual(result["chapter"], chapter)
             self.assertTrue(result["summary"], f"chapter {chapter} has empty summary")
@@ -68,26 +63,6 @@ class LLMOpsProjectTests(unittest.TestCase):
         details = LLMOpsPlatformProject().run_stage(40)["details"]
         self.assertEqual(details["direct_injection"]["risk"], "high")
         self.assertEqual(details["benign"]["risk"], "low")
-
-
-class InterviewProjectTests(unittest.TestCase):
-    def test_grader_separates_pro_from_toy(self) -> None:
-        rag_question = PRINCIPLE_QUESTIONS[2]
-        pro = rag_question.grade("分召回和精排，召回用 Hybrid 和 query 改写，精排用 rerank")
-        toy = rag_question.grade("换个更好的模型")
-        self.assertGreater(pro["coverage"], toy["coverage"])
-        self.assertEqual(toy["level"], "玩具级")
-
-    def test_every_question_has_keys_and_chapter(self) -> None:
-        for question in PRINCIPLE_QUESTIONS + ENGINEERING_QUESTIONS:
-            self.assertTrue(question.pro_keywords)
-            self.assertTrue(question.toy_answer)
-            self.assertGreaterEqual(question.source_chapter, 2)
-
-    def test_system_design_framework_present(self) -> None:
-        details = InterviewProject().run_stage(50)["details"]
-        self.assertEqual(len(details["system_design_framework"]), 6)
-        self.assertIn("智能客服 Agent", details["system_design_cases"])
 
 
 if __name__ == "__main__":

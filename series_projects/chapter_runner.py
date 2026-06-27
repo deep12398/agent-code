@@ -4,7 +4,6 @@ import argparse
 from typing import Any
 
 from agent_examples.cli import print_json
-from .interview_project import run_interview_stage
 from .llmops_platform_project import run_llmops_stage
 from .rag_memory_project import run_rag_memory_stage
 from .sourcing_agent_project import run_sourcing_stage
@@ -17,9 +16,7 @@ def run_chapter(chapter: int) -> dict[str, Any]:
         return run_sourcing_stage(chapter)
     if 34 <= chapter <= 48:
         return run_llmops_stage(chapter)
-    if 49 <= chapter <= 50:
-        return run_interview_stage(chapter)
-    raise ValueError(f"chapter {chapter} is outside the supported range 11-50")
+    raise ValueError(f"chapter {chapter} is outside the supported range 11-48")
 
 
 def main(chapter: int | None = None) -> None:
